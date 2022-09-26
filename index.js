@@ -57,9 +57,13 @@ server.post('/auch/login', upload.none(), async(req, res) => {
     res.send('ok');
 });
 
-server.use('/', (req, res, next) => {
+server.get('/', (req, res, next) => {
     res.render('main');
 });
+
+server.get('/favicon.ico', (req, res) => {
+    return;
+})
 
 server.use('*', (req, res) => {
     res.render('not_found');
