@@ -13,7 +13,7 @@ bot.setMyCommands([
     {command: '/start', description: 'Начальное приветствие'},
     {command: '/all', description: 'Начальное приветствие'},
 ])*/
-
+/*
 bot.on('message', async msg => {
     const text = msg.text;
     const chatId = msg.chat.id;
@@ -35,7 +35,7 @@ bot.on('message', async msg => {
         }    
     }
 })
-
+*/
 server.use(express.static('./public'));
 
 server.set('view engine', 'ejs');
