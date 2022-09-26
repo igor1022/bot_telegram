@@ -1,15 +1,18 @@
 {
-  "name": "bottelegram",
+  "name": "heroku_karpachoff",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "nodemon index.js"   
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.1",
+    "multer": "^1.4.5-lts.1",
     "node-telegram-bot-api": "^0.59.0",
     "nodemon": "^2.0.20"
   }
