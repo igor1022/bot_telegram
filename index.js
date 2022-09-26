@@ -5,18 +5,14 @@ const multer  = require('multer');
 const Login = require('./models/Login');
 const PORT = process.env.PORT || 3000;
 
-const telegramApi = require('node-telegram-bot-api');
+/*const telegramApi = require('node-telegram-bot-api');
 const token = '5679545340:AAE1vA-4eP8A6s1pjh77hMQdDjEOO0ZHwb8';
-
-const run = async() => {
-
-}
 
 const bot = new telegramApi(token, {polling: true});
 bot.setMyCommands([
     {command: '/start', description: 'Начальное приветствие'},
     {command: '/all', description: 'Начальное приветствие'},
-])
+])*/
 
 bot.on('message', async msg => {
     const text = msg.text;
@@ -38,8 +34,6 @@ bot.on('message', async msg => {
             }    
         }    
     }
-
-    //return bot.sendMessage(chatId, 'Я тебя не понимаю, попробуй еще раз!')
 })
 
 server.use(express.static('./public'));
@@ -57,11 +51,11 @@ server.post('/auch/login', upload.none(), async(req, res) => {
     res.send('ok');
 });
 
-server.get('/', (req, res, next) => {
+server.use('/', (req, res, next) => {
     res.render('main');
 });
 
-server.get('/favicon.ico', (req, res) => {
+server.use('/favicon.ico', (req, res) => {
     return;
 })
 
