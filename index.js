@@ -1,6 +1,8 @@
 const express = require('express');
 const server = express();
+const mongoose = require('mongoose');
 const multer  = require('multer');
+const Login = require('./models/Login');
 const PORT = process.env.PORT || 3000;
 
 const telegramApi = require('node-telegram-bot-api');
@@ -43,6 +45,14 @@ server.set('views', './views');
 
 const upload = multer();
 
+server.post('/auch/login', upload.none(), async(req, res) => {
+    console.log(req.body);
+    const {name, surname, phone, message, date} = req.body;
+    const custom = new Login({name, surname, phone, message, date});
+    await custom.save();
+    res.send('ok');
+});
+
 server.get('/', (req, res, next) => {
     res.render('main');
 });
@@ -56,7 +66,7 @@ server.use('*', (req, res) => {
 })
 const start = async () => {
     try {
-        //await mongoose.connect(`mongodb+srv://imitroshichev:account8@cluster0.gporvtq.mongodb.net/auth_roles?retryWrites=true&w=majority`)
+        await mongoose.connect(`mongodb+srv://imitroshichev:account8@cluster0.gporvtq.mongodb.net/auth_roles?retryWrites=true&w=majority`)
         server.listen(PORT, () => console.log(`server started on port ${PORT}`));
     } catch (e) {
         console.log(e);
