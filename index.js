@@ -1,6 +1,8 @@
 const express = require('express');
 const server = express();
+const mongoose = require('mongoose');
 const multer  = require('multer');
+const Login = require('./models/Login');
 const PORT = process.env.PORT || 3000;
 
 const telegramApi = require('node-telegram-bot-api');
@@ -13,24 +15,25 @@ bot.setMyCommands([
 ])
 
 bot.on('message', async msg => {
+    await mongoose.connect(`mongodb+srv://imitroshichev:account8@cluster0.gporvtq.mongodb.net/auth_roles?retryWrites=true&w=majority`)
     const text = msg.text;
     const chatId = msg.chat.id;
     if(text === '/all') {
-/*        const messages = await Login.find().sort('date');
+        const messages = await Login.find().sort('date');
         for (let i = 0; i < messages.length; i++) {
             await bot.sendMessage(chatId, `${JSON.stringify(messages[i])}`);
-        } */   
+        }    
     }
 
     if(text === '/start') {
-        /*const messages = await Login.find().sort('date');
+        const messages = await Login.find().sort('date');
         const date = new Date();
         for (let i = 0; i < messages.length; i++) {
             if(Number(messages[i].date) > Number(date - 3600000)) {
                 console.log(Number(date));
                 await bot.sendMessage(chatId, `${JSON.stringify(messages[i])}`);
             }    
-        }    */
+        }    
     }
 
     //return bot.sendMessage(chatId, 'Я тебя не понимаю, попробуй еще раз!')
@@ -45,9 +48,10 @@ const upload = multer();
 
 server.post('/auch/login', upload.none(), async(req, res) => {
     console.log(req.body);
-    /*const {name, surname, phone, message, date} = req.body;
+    await mongoose.connect(`mongodb+srv://imitroshichev:account8@cluster0.gporvtq.mongodb.net/auth_roles?retryWrites=true&w=majority`)
+    const {name, surname, phone, message, date} = req.body;
     const custom = new Login({name, surname, phone, message, date});
-    await custom.save();*/
+    await custom.save();
     res.send('ok');
 });
 
