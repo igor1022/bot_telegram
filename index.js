@@ -47,9 +47,9 @@ const upload = multer();
 
 server.post('/auch/login', upload.none(), async(req, res) => {
     console.log(req.body);
-    const {name, surname, phone, message, date} = req.body;
+    /*const {name, surname, phone, message, date} = req.body;
     const custom = new Login({name, surname, phone, message, date});
-    await custom.save();
+    await custom.save();*/
     res.send('ok');
 });
 
