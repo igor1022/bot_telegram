@@ -15,7 +15,6 @@ bot.setMyCommands([
 ])
 
 bot.on('message', async msg => {
-    await mongoose.connect(`mongodb+srv://imitroshichev:account8@cluster0.gporvtq.mongodb.net/auth_roles?retryWrites=true&w=majority`)
     const text = msg.text;
     const chatId = msg.chat.id;
     if(text === '/all') {
@@ -48,7 +47,6 @@ const upload = multer();
 
 server.post('/auch/login', upload.none(), async(req, res) => {
     console.log(req.body);
-    await mongoose.connect(`mongodb+srv://imitroshichev:account8@cluster0.gporvtq.mongodb.net/auth_roles?retryWrites=true&w=majority`)
     const {name, surname, phone, message, date} = req.body;
     const custom = new Login({name, surname, phone, message, date});
     await custom.save();
@@ -68,7 +66,7 @@ server.use('*', (req, res) => {
 })
 const start = async () => {
     try {
-        //await mongoose.connect(`mongodb+srv://imitroshichev:account8@cluster0.gporvtq.mongodb.net/auth_roles?retryWrites=true&w=majority`)
+        await mongoose.connect(`mongodb+srv://imitroshichev:account8@cluster0.gporvtq.mongodb.net/auth_roles?retryWrites=true&w=majority`)
         server.listen(PORT, () => console.log(`server started on port ${PORT}`));
     } catch (e) {
         console.log(e);
